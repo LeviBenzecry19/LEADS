@@ -1,6 +1,6 @@
 const AC_API_URL = process.env.AC_API_URL;
 const AC_API_KEY = process.env.AC_API_KEY;
-const TAG_NAME = 'LEAD WEBINAR ERP FRIVE';
+const TAG_NAME = 'LAND PAGE';
 
 const ALLOWED_ORIGINS = ['*'];
 
