@@ -56,7 +56,8 @@ export default async function handler(req, res) {
 
   const { event, data } = req.body ?? {};
 
-  if (event !== 'PURCHASE_APPROVED') {
+  const ACCEPTED_EVENTS = new Set(['PURCHASE_APPROVED', 'PURCHASE_COMPLETE']);
+  if (!ACCEPTED_EVENTS.has(event)) {
     return res.status(200).json({ message: `Event "${event}" ignored` });
   }
 
