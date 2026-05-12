@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Webinar · ERP Frive — para construtoras de autoria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-900: #16261C;
+    --green-800: #1E3A2A;
+    --green-700: #294B37;
+    --green-600: #3A6149;
+    --green-500: #587864;
+    --green-100: #DDE4DA;
+    --brass:     #B08A4A;
+    --brass-2:   #C9A769;
+    --cream:     #F1ECDE;
+    --cream-2:   #E9E2D0;
+    --paper:     #FBF7EC;
+    --ink:       #18221C;
+    --ink-2:     #3B463E;
+    --muted:     #7A7565;
+    --line:      #D5CCB4;
+    --rust:      #9C462C;
+
+    --serif: "Cormorant Garamond", "Cormorant", "Garamond", serif;
+    --sans:  "Manrope", -apple-system, "Helvetica Neue", sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* subtle paper noise */
+    background-image:
+      radial-gradient(1100px 700px at 90% -10%, rgba(46, 87, 60, 0.08), transparent 55%),
+      radial-gradient(800px 600px at -10% 110%, rgba(176, 138, 74, 0.10), transparent 55%);
+  }
+  ::selection { background: var(--green-800); color: var(--cream); }
+
+  /* —— Top bar —— */
+  .top {
+    border-bottom: 1px solid var(--line);
+  }
+  .top-inner {
+    max-width: 1180px; margin: 0 auto;
+    padding: 22px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+  }
+  .wordmark {
+    display: flex; align-items: baseline; gap: 8px;
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: 0.01em;
+    color: var(--green-800);
+  }
+  .wordmark em {
+    font-style: italic; font-weight: 500;
+    color: var(--brass);
+    font-size: 22px;
+  }
+  .wordmark .dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--brass);
+    margin: 0 4px;
+    transform: translateY(-4px);
+  }
+  .top .live {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green-800);
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .top .live .pulse {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--brass);
+    box-shadow: 0 0 0 0 rgba(176,138,74,0.65);
+    animation: pulse 1.8s ease-out infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(176,138,74,0.6); }
+    70% { box-shadow: 0 0 0 9px rgba(176,138,74,0); }
+    100% { box-shadow: 0 0 0 0 rgba(176,138,74,0); }
+  }
+
+  /* —— Main editorial spread —— */
+  main {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 64px 32px 80px;
+    display: grid;
+    grid-template-columns: 1.05fr 460px;
+    gap: 72px;
+    align-items: start;
+  }
+  @media (max-width: 940px) {
+    main { grid-template-columns: 1fr; gap: 40px; padding: 40px 24px 64px; }
+  }
+
+  /* LEFT: editorial column */
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--green-700);
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-bottom: 36px;
+  }
+  .eyebrow .bar { width: 32px; height: 1px; background: var(--green-700); display: inline-block; }
+
+  h1.display {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(48px, 7.4vw, 100px);
+    line-height: 0.95;
+    letter-spacing: -0.018em;
+    margin: 0;
+    color: var(--green-900);
+    text-wrap: balance;
+  }
+  h1.display .it {
+    font-style: italic; font-weight: 500;
+    color: var(--brass);
+  }
+  h1.display .small {
+    display: block;
+    font-size: 0.32em;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink-2);
+    margin-top: 18px;
+    letter-spacing: 0.005em;
+    line-height: 1.3;
+  }
+
+  .lede {
+    margin: 32px 0 0;
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    max-width: 50ch;
+    text-wrap: pretty;
+  }
+  .lede strong { color: var(--green-800); font-weight: 600; }
+
+  /* meta row, editorial style */
+  .meta {
+    margin-top: 44px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .meta .item {
+    padding: 22px 24px 22px 0;
+    border-right: 1px solid var(--line);
+  }
+  .meta .item + .item { padding-left: 24px; }
+  .meta .item:last-child { border-right: 0; padding-right: 0; }
+  .meta .k {
+    font-family: var(--mono);
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .meta .v {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.1;
+    color: var(--green-800);
+    letter-spacing: -0.01em;
+  }
+  .meta .v em { font-style: italic; color: var(--brass); font-weight: 500; }
+  @media (max-width: 540px) {
+    .meta { grid-template-columns: 1fr; }
+    .meta .item { border-right: 0; border-bottom: 1px solid var(--line); padding: 18px 0; }
+    .meta .item + .item { padding-left: 0; }
+    .meta .item:last-child { border-bottom: 0; }
+  }
+
+  /* numbered editorial list */
+  .programa {
+    margin-top: 48px;
+  }
+  .programa-head {
+    font-family: var(--mono);
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+  .programa ol {
+    list-style: none; padding: 0; margin: 0;
+  }
+  .programa li {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 18px;
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .programa li:last-child { border-bottom: 1px solid var(--line); }
+  .programa li .n {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 26px;
+    color: var(--brass);
+    font-weight: 500;
+    line-height: 1;
+  }
+  .programa li .t {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--green-900);
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+  .programa li .t em { font-style: italic; color: var(--brass); font-weight: 500; }
+
+  /* small signature line */
+  .signature {
+    margin-top: 44px;
+    display: flex; gap: 14px; align-items: center;
+    color: var(--ink-2);
+  }
+  .signature .avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background:
+      repeating-linear-gradient(45deg, var(--cream-2) 0 6px, var(--cream) 6px 12px);
+    border: 1px solid var(--line);
+    flex-shrink: 0;
+  }
+  .signature .who {
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.25;
+  }
+  .signature .who em { font-style: italic; color: var(--brass); }
+  .signature .who .role {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* —— RIGHT: form card —— */
+  .form-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 38px 36px;
+    position: sticky;
+    top: 24px;
+    box-shadow: 0 26px 60px -32px rgba(22, 38, 28, 0.30);
+  }
+  .form-card::before {
+    content: "";
+    position: absolute; inset: 7px;
+    border: 1px solid color-mix(in oklab, var(--brass) 28%, transparent);
+    pointer-events: none;
+  }
+  @media (max-width: 940px) {
+    .form-card { position: static; padding: 30px 26px; }
+  }
+
+  .form-head { margin-bottom: 26px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+  .form-head .seats {
+    font-family: var(--mono);
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--brass);
+    display: inline-flex; align-items: center; gap: 9px;
+    margin-bottom: 16px;
+  }
+  .form-head .seats .pulse {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--brass);
+  }
+  .form-head .t {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--green-900);
+    text-wrap: balance;
+  }
+  .form-head .t em { font-style: italic; color: var(--brass); font-weight: 500; }
+  .form-head .s {
+    margin: 10px 0 0;
+    font-size: 13.5px; color: var(--ink-2); line-height: 1.55;
+    max-width: 36ch;
+  }
+
+  .field { margin-bottom: 18px; position: relative; }
+  .field label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin-bottom: 9px;
+  }
+  .field label .req { color: var(--brass); }
+  .field input, .field select, .field textarea {
+    width: 100%;
+    background: transparent;
+    color: var(--ink);
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 10px 0 12px;
+    font-family: var(--serif);
+    font-size: 21px;
+    font-weight: 500;
+    outline: none;
+    transition: border-color .2s;
+    letter-spacing: -0.005em;
+  }
+  .field input::placeholder, .field textarea::placeholder {
+    color: var(--muted); font-style: italic; font-family: var(--serif); font-weight: 400;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-bottom-color: var(--brass);
+  }
+  .field textarea {
+    resize: vertical;
+    min-height: 80px;
+    font-size: 17px;
+    line-height: 1.45;
+  }
+  .field select {
+    appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%23B08A4A' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 4px center;
+    background-size: 12px;
+    padding-right: 24px;
+    color: var(--ink);
+  }
+  .field select option { background: var(--paper); color: var(--ink); }
+  .field.invalid input, .field.invalid select, .field.invalid textarea {
+    border-bottom-color: var(--rust);
+  }
+  .field .err {
+    margin-top: 6px;
+    color: var(--rust);
+    font-family: var(--mono);
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    display: none;
+  }
+  .field.invalid .err { display: block; }
+
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  @media (max-width: 440px) { .row-2 { grid-template-columns: 1fr; } }
+
+  .submit {
+    width: 100%;
+    margin-top: 16px;
+    background: var(--green-800);
+    color: var(--cream);
+    border: 0;
+    border-radius: 0;
+    padding: 18px 22px;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    transition: background .2s, transform .12s, color .2s;
+  }
+  .submit:hover { background: var(--green-900); color: var(--brass-2); }
+  .submit:active { transform: translateY(1px); }
+  .submit:disabled { opacity: 0.6; cursor: wait; }
+  .submit .arrow { transition: transform .25s; font-family: var(--serif); font-style: italic; font-size: 18px; letter-spacing: 0; text-transform: none; }
+  .submit:hover .arrow { transform: translateX(4px); }
+
+  .fineprint {
+    margin-top: 14px;
+    font-family: var(--mono);
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted);
+    text-align: center; line-height: 1.6;
+  }
+
+  /* Success */
+  .success { display: none; text-align: center; padding: 8px 0; animation: rise .45s ease; }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+  .success .seal {
+    width: 84px; height: 84px;
+    margin: 8px auto 22px;
+    border-radius: 50%;
+    border: 1px solid var(--brass);
+    display: grid; place-items: center;
+    color: var(--brass);
+    font-family: var(--serif); font-style: italic; font-size: 36px;
+    position: relative;
+  }
+  .success .seal::before {
+    content: ""; position: absolute; inset: 6px; border-radius: 50%;
+    border: 1px solid color-mix(in oklab, var(--brass) 35%, transparent);
+  }
+  .success h3 {
+    font-family: var(--serif);
+    font-size: 32px; font-weight: 500;
+    margin: 0 0 10px; letter-spacing: -0.01em; color: var(--green-900);
+  }
+  .success h3 em { font-style: italic; color: var(--brass); font-weight: 500; }
+  .success p { color: var(--ink-2); font-size: 14px; line-height: 1.6; max-width: 36ch; margin: 0 auto; }
+
+  /* —— Footer —— */
+  footer {
+    border-top: 1px solid var(--line);
+    background: color-mix(in oklab, var(--cream) 70%, var(--cream-2));
+  }
+  .foot-inner {
+    max-width: 1180px; margin: 0 auto;
+    padding: 28px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .foot-inner .mark {
+    font-family: var(--serif); font-size: 22px; font-weight: 500;
+    color: var(--green-800); letter-spacing: 0; text-transform: none;
+  }
+  .foot-inner .mark em { font-style: italic; color: var(--brass); font-weight: 500; }
+</style>
+</head>
+<body>
+
+<header class="top" data-screen-label="Topbar">
+  <div class="top-inner">
+    <div class="wordmark">Frive<span class="dot"></span><em>ERP</em></div>
+    <span class="live"><span class="pulse"></span> Encontro ao vivo · vagas limitadas</span>
+  </div>
+</header>
+
+<main data-screen-label="Webinar LP">
+  <!-- LEFT: editorial column -->
+  <section>
+    <div class="eyebrow"><span class="bar"></span> Encontro online · gratuito · 23 maio</div>
+
+    <h1 class="display">
+      A obra <span class="it">sob controle</span>.
+      <span class="small">Um encontro reservado para construtoras que entregam autoria — e querem operar com a mesma elegância nos bastidores.</span>
+    </h1>
+
+    <p class="lede">
+      Em sessenta minutos, abrimos os bastidores do <strong>ERP Frive</strong> — o sistema escolhido pelas construtoras boutique do país para conduzir orçamento, canteiro, compras e financeiro em um só lugar. Sem planilhas paralelas. Sem surpresas no fim do mês.
+    </p>
+
+    <div class="meta">
+      <div class="item">
+        <div class="k">Data</div>
+        <div class="v">Quinta · <em>23 mai</em></div>
+      </div>
+      <div class="item">
+        <div class="k">Horário</div>
+        <div class="v">19h <em>(BRT)</em></div>
+      </div>
+      <div class="item">
+        <div class="k">Formato</div>
+        <div class="v">Online · <em>ao vivo</em></div>
+      </div>
+    </div>
+
+    <div class="programa">
+      <div class="programa-head">— Programa do encontro</div>
+      <ol>
+        <li>
+          <span class="n">i</span>
+          <span class="t">O fim das planilhas paralelas — uma só <em>fonte de verdade</em> por obra.</span>
+        </li>
+        <li>
+          <span class="n">ii</span>
+          <span class="t">O método Frive: orçamento, compras e financeiro <em>integrados</em>.</span>
+        </li>
+        <li>
+          <span class="n">iii</span>
+          <span class="t">Demonstração ao vivo — incluindo o <em>app de canteiro</em>.</span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="signature">
+      <div class="avatar" aria-hidden="true"></div>
+      <div class="who">
+        Conduzido por <em>Luísa Caldeira</em>
+        <span class="role">Co-fundadora · Frive</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- RIGHT: form -->
+  <aside class="form-card" id="formCard" data-screen-label="Form">
+    <div id="formInner">
+      <div class="form-head">
+        <span class="seats"><span class="pulse"></span> 38 cadeiras restantes</span>
+        <div class="t">Reserve sua <em>cadeira</em>.</div>
+        <p class="s">Preencha seus dados — o link da transmissão segue direto para o seu e-mail.</p>
+      </div>
+
+      <form id="leadForm" novalidate>
+        <div class="field">
+          <label for="nome">Nome <span class="req">obrigatório</span></label>
+          <input type="text" id="nome" name="nome" placeholder="Como você assina" autocomplete="name" />
+          <div class="err">Diga seu nome completo</div>
+        </div>
+
+        <div class="field">
+          <label for="email">E-mail <span class="req">obrigatório</span></label>
+          <input type="email" id="email" name="email" placeholder="voce@empresa.com" autocomplete="email" />
+          <div class="err">Informe um e-mail válido</div>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="idade">Idade <span class="req">*</span></label>
+            <input type="number" id="idade" name="idade" min="16" max="99" placeholder="ex. 38" inputmode="numeric" />
+            <div class="err">Entre 16 e 99</div>
+          </div>
+          <div class="field">
+            <label for="cargo">Cargo <span class="req">*</span></label>
+            <select id="cargo" name="cargo">
+              <option value="" disabled selected>Selecione</option>
+              <option>Sócio(a) / Diretor(a)</option>
+              <option>Engenheiro(a)</option>
+              <option>Arquiteto(a)</option>
+              <option>Gerente de obra</option>
+              <option>Gestor(a) financeiro</option>
+              <option>Comprador(a) / Suprimentos</option>
+              <option>Outro</option>
+            </select>
+            <div class="err">Escolha um cargo</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="dificuldade">Maior dificuldade hoje <span class="req">*</span></label>
+          <textarea id="dificuldade" name="dificuldade" rows="3" placeholder="Conte, em poucas linhas, o gargalo que você quer resolver."></textarea>
+          <div class="err">Conte sua maior dificuldade</div>
+        </div>
+
+        <button type="submit" class="submit">
+          Reservar minha cadeira
+          <span class="arrow">→</span>
+        </button>
+        <p class="fineprint">Confidencial · 100% gratuito · Sem compromisso</p>
+      </form>
+    </div>
+
+    <div class="success" id="successBox">
+      <div class="seal">✓</div>
+      <h3>Cadeira <em>reservada</em>.</h3>
+      <p>Enviamos o link da transmissão para o seu e-mail. Nos vemos quinta, 23 de maio, às 19h.</p>
+    </div>
+  </aside>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <div class="mark">Frive <em>ERP</em></div>
+    <div>© 2026 · Software para construção civil · São Paulo</div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    const STORAGE_KEY = 'frive_webinar_registration';
+    const THANK_YOU = '/obrigado.html';
+
+    // If already registered, send them to the thank-you page on load.
+    try {
+      const existing = localStorage.getItem(STORAGE_KEY);
+      if (existing && JSON.parse(existing) && JSON.parse(existing).nome) {
+        window.location.replace(THANK_YOU);
+        return;
+      }
+    } catch (_) { /* ignore parse errors */ }
+
+    const form = document.getElementById('leadForm');
+    const fields = ['nome', 'email', 'idade', 'cargo', 'dificuldade'];
+    const ENDPOINT = 'https://leads-phi-lac.vercel.app/api/lp-lead';
+
+    function validateOne(id) {
+      const el = document.getElementById(id);
+      const wrap = el.closest('.field');
+      const v = (el.value || '').trim();
+      let bad = false;
+      if (id === 'nome') bad = v.length < 2 || !v.includes(' ');
+      if (id === 'email') bad = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+      if (id === 'idade') {
+        const n = parseInt(v, 10);
+        bad = !v || isNaN(n) || n < 16 || n > 99;
+      }
+      if (id === 'cargo') bad = !v;
+      if (id === 'dificuldade') bad = v.length < 6;
+      wrap.classList.toggle('invalid', bad);
+      return !bad;
+    }
+
+    fields.forEach(id => {
+      const el = document.getElementById(id);
+      el.addEventListener('input', () => {
+        if (el.closest('.field').classList.contains('invalid')) validateOne(id);
+      });
+      el.addEventListener('change', () => validateOne(id));
+    });
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const ok = fields.map(validateOne).every(Boolean);
+      if (!ok) {
+        const firstBad = form.querySelector('.field.invalid input, .field.invalid select, .field.invalid textarea');
+        if (firstBad) firstBad.focus();
+        return;
+      }
+
+      // Build the JSON payload
+      const payload = {
+        nome: document.getElementById('nome').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        idade: parseInt(document.getElementById('idade').value, 10),
+        cargo: document.getElementById('cargo').value,
+        dificuldade: document.getElementById('dificuldade').value.trim(),
+        webinar: {
+          titulo: 'ERP Frive · A obra sob controle',
+          data: '2026-05-23',
+          horario: '19:00',
+          fuso: 'BRT',
+          formato: 'Online ao vivo'
+        },
+        protocolo: 'FR-' + Math.floor(100000 + Math.random() * 899999),
+        registradoEm: new Date().toISOString()
+      };
+
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(payload)); } catch (_) {}
+
+      const btn = form.querySelector('.submit');
+      btn.disabled = true;
+      btn.innerHTML = 'Enviando<span class="arrow">…</span>';
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true
+      })
+      .catch(() => { /* still redirect on network failure — lead is in localStorage */ })
+      .finally(() => {
+        window.location.assign(THANK_YOU);
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

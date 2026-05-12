@@ -6,6 +6,9 @@
   "functions": {
     "api/hotmart-webhook.js": {
       "maxDuration": 10
+    },
+    "api/lp-lead.js": {
+      "maxDuration": 10
     }
   }
 }
