@@ -1,6 +1,6 @@
 const AC_API_URL = process.env.AC_API_URL;
 const AC_API_KEY = process.env.AC_API_KEY;
-const TAG_NAME = 'LAND PAGE';
+const TAG_NAME = 'MASTERCLASS';
 
 const ALLOWED_ORIGINS = ['*'];
 
@@ -64,7 +64,7 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { nome, email, idade, cargo, dificuldade } = req.body ?? {};
+  const { nome, email, whatsapp, cargo } = req.body ?? {};
 
   if (!isValidEmail(email)) {
     return res.status(400).json({ error: 'Email inválido' });
@@ -75,17 +75,17 @@ export default async function handler(req, res) {
 
   const [firstName, ...rest] = String(nome).trim().split(/\s+/);
   const lastName = rest.join(' ');
+  const phone = whatsapp ? String(whatsapp).replace(/\D/g, '') : undefined;
 
   const noteLines = [
-    `Idade: ${idade ?? '—'}`,
     `Cargo: ${cargo ?? '—'}`,
-    `Maior dificuldade: ${dificuldade ?? '—'}`,
-    `Origem: Webinar ERP Frive · ${new Date().toISOString()}`,
+    `WhatsApp: ${whatsapp ?? '—'}`,
+    `Origem: Masterclass Boutique Construtora · ${new Date().toISOString()}`,
   ];
 
   try {
     const [contactId, tagId] = await Promise.all([
-      upsertContact(email, firstName, lastName),
+      upsertContact(email, firstName, lastName, phone),
       getOrCreateTag(),
     ]);
     await Promise.all([

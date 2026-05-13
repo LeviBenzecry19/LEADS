@@ -1,689 +1,1088 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Webinar · ERP Frive — para construtoras de autoria</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+<title>Masterclass Foco do Cliente e Posicionamento | Boutique Construtora</title>
+<meta name="description" content="Masterclass gratuita da Boutique Construtora - 02/06 às 19h. Aprenda a posicionar sua entrega, comunicar valor e atrair os clientes certos." />
+<meta name="robots" content="index, follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --green-900: #16261C;
-    --green-800: #1E3A2A;
-    --green-700: #294B37;
-    --green-600: #3A6149;
-    --green-500: #587864;
-    --green-100: #DDE4DA;
-    --brass:     #B08A4A;
-    --brass-2:   #C9A769;
-    --cream:     #F1ECDE;
-    --cream-2:   #E9E2D0;
-    --paper:     #FBF7EC;
-    --ink:       #18221C;
-    --ink-2:     #3B463E;
-    --muted:     #7A7565;
-    --line:      #D5CCB4;
-    --rust:      #9C462C;
-
-    --serif: "Cormorant Garamond", "Cormorant", "Garamond", serif;
-    --sans:  "Manrope", -apple-system, "Helvetica Neue", sans-serif;
-    --mono:  "JetBrains Mono", ui-monospace, monospace;
+    --bg:       #1f2426;
+    --bg-card:  #242b2e;
+    --fg:       #e9e4d8;
+    --fg-muted: #7d776e;
+    --primary:       #115551;
+    --primary-dark:  #0d413e;
+    --primary-fg:    #f7f5f1;
+    --border:   #2e3539;
+    --gold:     #bf9d18;
+    --gold-2:   #e4be25;
+    --gold-3:   #ebd060;
+    --cta-bg:   #a58627;
+    --cta-hover: #8f7320;
+    --sans: 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
+    --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
   }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
   body {
-    min-height: 100vh;
-    background: var(--cream);
-    color: var(--ink);
+    background: var(--bg);
+    color: var(--fg);
     font-family: var(--sans);
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    /* subtle paper noise */
-    background-image:
-      radial-gradient(1100px 700px at 90% -10%, rgba(46, 87, 60, 0.08), transparent 55%),
-      radial-gradient(800px 600px at -10% 110%, rgba(176, 138, 74, 0.10), transparent 55%);
   }
-  ::selection { background: var(--green-800); color: var(--cream); }
+  img { display: block; max-width: 100%; }
+  button { cursor: pointer; font-family: inherit; border: none; background: none; }
+  a { color: inherit; text-decoration: none; }
 
-  /* —— Top bar —— */
-  .top {
-    border-bottom: 1px solid var(--line);
+  /* ── Scroll progress bar ── */
+  #progress {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: 2px; background: var(--gold-2);
+    transform-origin: left; transform: scaleX(0);
+    transition: transform .1s linear;
   }
-  .top-inner {
-    max-width: 1180px; margin: 0 auto;
-    padding: 22px 32px;
+
+  /* ── Announcement bar ── */
+  .announce {
+    background: var(--primary);
+    color: var(--primary-fg);
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    position: relative; z-index: 40;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+  }
+  .hero-bg img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .hero-bg-overlay {
+    position: absolute; inset: 0;
+    background: rgba(17, 85, 81, .65);
+  }
+  .hero-nav {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 20;
     display: flex; align-items: center; justify-content: space-between;
-    gap: 16px;
+    padding: 20px 24px;
   }
-  .wordmark {
-    display: flex; align-items: baseline; gap: 8px;
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: 24px;
-    letter-spacing: 0.01em;
-    color: var(--green-800);
+  .hero-nav img { height: 44px; object-fit: contain; filter: brightness(0) invert(1); opacity: .9; }
+  .btn-nav {
+    display: none;
+    font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    color: rgba(247,245,241,.9);
+    border: 1px solid rgba(255,255,255,.4);
+    padding: 10px 20px;
+    background: transparent;
+    transition: background .2s, color .2s;
   }
-  .wordmark em {
-    font-style: italic; font-weight: 500;
-    color: var(--brass);
-    font-size: 22px;
-  }
-  .wordmark .dot {
-    width: 5px; height: 5px; border-radius: 50%;
-    background: var(--brass);
-    margin: 0 4px;
-    transform: translateY(-4px);
-  }
-  .top .live {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--green-800);
-    display: inline-flex; align-items: center; gap: 10px;
-  }
-  .top .live .pulse {
-    width: 7px; height: 7px; border-radius: 50%; background: var(--brass);
-    box-shadow: 0 0 0 0 rgba(176,138,74,0.65);
-    animation: pulse 1.8s ease-out infinite;
-  }
-  @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(176,138,74,0.6); }
-    70% { box-shadow: 0 0 0 9px rgba(176,138,74,0); }
-    100% { box-shadow: 0 0 0 0 rgba(176,138,74,0); }
-  }
+  .btn-nav:hover { background: rgba(255,255,255,.08); }
+  @media (min-width: 768px) { .btn-nav { display: inline-flex; } }
 
-  /* —— Main editorial spread —— */
-  main {
-    max-width: 1180px;
+  .hero-body {
+    position: relative; z-index: 10;
+    width: 100%;
+    padding: 120px 24px 80px;
+    max-width: 860px;
     margin: 0 auto;
-    padding: 64px 32px 80px;
-    display: grid;
-    grid-template-columns: 1.05fr 460px;
-    gap: 72px;
-    align-items: start;
   }
-  @media (max-width: 940px) {
-    main { grid-template-columns: 1fr; gap: 40px; padding: 40px 24px 64px; }
+  .hero-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+  .hero-tag {
+    font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,.3);
+    color: rgba(247,245,241,.8);
+    padding: 4px 12px;
   }
-
-  /* LEFT: editorial column */
-  .eyebrow {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--green-700);
-    display: inline-flex; align-items: center; gap: 12px;
-    margin-bottom: 36px;
-  }
-  .eyebrow .bar { width: 32px; height: 1px; background: var(--green-700); display: inline-block; }
-
-  h1.display {
+  .hero h1 {
     font-family: var(--serif);
     font-weight: 500;
-    font-size: clamp(48px, 7.4vw, 100px);
-    line-height: 0.95;
-    letter-spacing: -0.018em;
-    margin: 0;
-    color: var(--green-900);
-    text-wrap: balance;
-  }
-  h1.display .it {
-    font-style: italic; font-weight: 500;
-    color: var(--brass);
-  }
-  h1.display .small {
-    display: block;
-    font-size: 0.32em;
-    font-weight: 400;
-    font-style: italic;
-    color: var(--ink-2);
-    margin-top: 18px;
-    letter-spacing: 0.005em;
-    line-height: 1.3;
-  }
-
-  .lede {
-    margin: 32px 0 0;
-    font-family: var(--sans);
-    font-size: 16px;
-    line-height: 1.65;
-    color: var(--ink-2);
-    max-width: 50ch;
-    text-wrap: pretty;
-  }
-  .lede strong { color: var(--green-800); font-weight: 600; }
-
-  /* meta row, editorial style */
-  .meta {
-    margin-top: 44px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-  .meta .item {
-    padding: 22px 24px 22px 0;
-    border-right: 1px solid var(--line);
-  }
-  .meta .item + .item { padding-left: 24px; }
-  .meta .item:last-child { border-right: 0; padding-right: 0; }
-  .meta .k {
-    font-family: var(--mono);
-    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 10px;
-  }
-  .meta .v {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: 22px;
+    font-size: clamp(40px, 7vw, 72px);
     line-height: 1.1;
-    color: var(--green-800);
-    letter-spacing: -0.01em;
+    color: #fff;
+    margin: 12px 0 0;
   }
-  .meta .v em { font-style: italic; color: var(--brass); font-weight: 500; }
-  @media (max-width: 540px) {
-    .meta { grid-template-columns: 1fr; }
-    .meta .item { border-right: 0; border-bottom: 1px solid var(--line); padding: 18px 0; }
-    .meta .item + .item { padding-left: 0; }
-    .meta .item:last-child { border-bottom: 0; }
+  .hero h1 em { font-style: italic; color: var(--gold-3); font-weight: 500; }
+  .hero-sub {
+    font-size: clamp(16px, 2.5vw, 22px);
+    color: rgba(247,245,241,.85);
+    font-weight: 300;
+    line-height: 1.55;
+    margin: 20px 0 0;
+    max-width: 640px;
+  }
+  .hero-date {
+    font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--gold-3);
+    margin-top: 28px;
+  }
+  .countdown {
+    display: flex; gap: 14px;
+    margin-top: 12px;
+  }
+  .cd-block {
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .cd-box {
+    background: rgba(17,85,81,.2);
+    border: 1px solid rgba(17,85,81,.3);
+    backdrop-filter: blur(4px);
+    width: 64px; height: 64px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif);
+    font-size: 28px; font-weight: 600;
+    color: #fff;
+  }
+  @media (min-width: 480px) { .cd-box { width: 80px; height: 80px; font-size: 34px; } }
+  .cd-label {
+    font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+    color: rgba(247,245,241,.7);
+    margin-top: 8px;
+  }
+  .hero-cta-row {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+    margin-top: 32px;
+  }
+  .btn-cta {
+    display: inline-flex; align-items: center;
+    font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+    font-weight: 600;
+    background: var(--cta-bg);
+    color: var(--primary-fg);
+    padding: 16px 36px;
+    transition: background .2s;
+  }
+  .btn-cta:hover { background: var(--cta-hover); }
+  .hero-aside-text {
+    font-size: 12px; color: rgba(247,245,241,.6); font-weight: 300;
+    border-left: 1px solid rgba(255,255,255,.2);
+    padding-left: 16px;
+    line-height: 1.65;
+    max-width: 260px;
   }
 
-  /* numbered editorial list */
-  .programa {
-    margin-top: 48px;
+  /* ── Sections ── */
+  .section { padding: 80px 24px; }
+  @media (min-width: 768px) { .section { padding: 112px 24px; } }
+  .section-inner { max-width: 1024px; margin: 0 auto; }
+  .section-inner--narrow { max-width: 768px; margin: 0 auto; }
+  .section-inner--wide { max-width: 1200px; margin: 0 auto; }
+
+  .section--primary { background: var(--primary); color: var(--primary-fg); }
+
+  /* decorative line */
+  .deco-line {
+    height: 1px; background: var(--gold);
+    width: 0; margin-bottom: 32px;
+    transition: width .8s ease;
   }
-  .programa-head {
-    font-family: var(--mono);
-    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 18px;
+  .deco-line.visible { width: 64px; }
+  .deco-line--center { margin-left: auto; margin-right: auto; }
+
+  /* section eyebrow */
+  .eyebrow {
+    font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--fg-muted);
   }
-  .programa ol {
-    list-style: none; padding: 0; margin: 0;
+  .section--primary .eyebrow { color: rgba(247,245,241,.55); }
+  h2.section-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4.5vw, 46px);
+    font-weight: 500;
+    line-height: 1.15;
+    margin: 12px 0 0;
   }
-  .programa li {
+  h2.section-title em { font-style: italic; color: var(--gold-2); font-weight: 500; }
+
+  /* ── About ── */
+  .about-grid {
     display: grid;
-    grid-template-columns: 56px 1fr;
-    gap: 18px;
-    padding: 18px 0;
-    border-top: 1px solid var(--line);
-    align-items: baseline;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    align-items: center;
   }
-  .programa li:last-child { border-bottom: 1px solid var(--line); }
-  .programa li .n {
+  @media (min-width: 768px) {
+    .about-grid { grid-template-columns: 340px 1fr; gap: 64px; }
+  }
+  .about-img-wrap {
+    position: relative;
+  }
+  .about-img-wrap img {
+    width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top;
+  }
+  .about-img-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: -12px; right: -12px;
+    width: 100%; height: 100%;
+    border: 1px solid var(--border);
+    z-index: -1;
+  }
+  .about-name {
     font-family: var(--serif);
-    font-style: italic;
-    font-size: 26px;
-    color: var(--brass);
+    font-size: clamp(26px, 3.5vw, 36px);
     font-weight: 500;
-    line-height: 1;
+    margin-top: 10px;
   }
-  .programa li .t {
-    font-family: var(--serif);
-    font-size: 22px;
-    font-weight: 500;
-    color: var(--green-900);
-    line-height: 1.25;
-    letter-spacing: -0.005em;
-    text-wrap: balance;
+  .about-bio {
+    font-size: 15px; font-weight: 300; line-height: 1.7;
+    color: rgba(233,228,216,.8);
+    margin-top: 16px;
   }
-  .programa li .t em { font-style: italic; color: var(--brass); font-weight: 500; }
+  .about-bio + .about-bio { margin-top: 16px; }
+  .btn-outline {
+    display: inline-flex; align-items: center;
+    font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--gold-3);
+    border: 1px solid var(--gold);
+    padding: 14px 28px;
+    margin-top: 24px;
+    transition: background .2s, color .2s;
+  }
+  .btn-outline:hover { background: rgba(191,157,24,.1); }
 
-  /* small signature line */
-  .signature {
-    margin-top: 44px;
-    display: flex; gap: 14px; align-items: center;
-    color: var(--ink-2);
+  /* ── Form section ── */
+  .form-section-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    align-items: center;
   }
-  .signature .avatar {
-    width: 44px; height: 44px; border-radius: 50%;
-    background:
-      repeating-linear-gradient(45deg, var(--cream-2) 0 6px, var(--cream) 6px 12px);
-    border: 1px solid var(--line);
-    flex-shrink: 0;
+  @media (min-width: 900px) {
+    .form-section-grid { grid-template-columns: 1fr 460px; gap: 64px; }
   }
-  .signature .who {
-    font-family: var(--serif);
-    font-size: 18px;
-    line-height: 1.25;
-  }
-  .signature .who em { font-style: italic; color: var(--brass); }
-  .signature .who .role {
-    display: block;
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-top: 4px;
+  .form-section-lead h2 { color: var(--primary-fg); }
+  .form-section-lead p {
+    font-size: 15px; font-weight: 300;
+    color: rgba(247,245,241,.85);
+    line-height: 1.65;
+    margin-top: 16px;
   }
 
-  /* —— RIGHT: form card —— */
   .form-card {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    padding: 38px 36px;
-    position: sticky;
-    top: 24px;
-    box-shadow: 0 26px 60px -32px rgba(22, 38, 28, 0.30);
+    background: rgba(36, 43, 46, .95);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(46,53,57,.6);
+    padding: 32px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.35);
   }
-  .form-card::before {
-    content: "";
-    position: absolute; inset: 7px;
-    border: 1px solid color-mix(in oklab, var(--brass) 28%, transparent);
-    pointer-events: none;
-  }
-  @media (max-width: 940px) {
-    .form-card { position: static; padding: 30px 26px; }
-  }
-
-  .form-head { margin-bottom: 26px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
-  .form-head .seats {
-    font-family: var(--mono);
-    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--brass);
-    display: inline-flex; align-items: center; gap: 9px;
-    margin-bottom: 16px;
-  }
-  .form-head .seats .pulse {
-    width: 6px; height: 6px; border-radius: 50%; background: var(--brass);
-  }
-  .form-head .t {
+  @media (min-width: 480px) { .form-card { padding: 32px 36px; } }
+  .form-card h3 {
     font-family: var(--serif);
-    font-size: 30px;
-    font-weight: 500;
-    line-height: 1.05;
-    letter-spacing: -0.01em;
-    color: var(--green-900);
-    text-wrap: balance;
+    font-size: 22px; font-weight: 600;
+    margin-bottom: 24px;
+    color: var(--fg);
   }
-  .form-head .t em { font-style: italic; color: var(--brass); font-weight: 500; }
-  .form-head .s {
-    margin: 10px 0 0;
-    font-size: 13.5px; color: var(--ink-2); line-height: 1.55;
-    max-width: 36ch;
-  }
-
-  .field { margin-bottom: 18px; position: relative; }
+  .field { margin-bottom: 16px; }
   .field label {
     display: block;
-    font-family: var(--mono);
-    font-size: 10px;
+    font-size: 11px; letter-spacing: .15em; text-transform: uppercase;
     font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--ink-2);
-    margin-bottom: 9px;
+    color: rgba(233,228,216,.8);
+    margin-bottom: 8px;
   }
-  .field label .req { color: var(--brass); }
-  .field input, .field select, .field textarea {
+  .field input, .field select {
     width: 100%;
-    background: transparent;
-    color: var(--ink);
-    border: 0;
-    border-bottom: 1px solid var(--line);
-    padding: 10px 0 12px;
-    font-family: var(--serif);
-    font-size: 21px;
-    font-weight: 500;
+    background: var(--bg);
+    color: var(--fg);
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    font-family: var(--sans);
+    font-size: 14px;
     outline: none;
-    transition: border-color .2s;
-    letter-spacing: -0.005em;
+    border-radius: 0;
+    transition: border-color .2s, box-shadow .2s;
+    -webkit-appearance: none; appearance: none;
   }
-  .field input::placeholder, .field textarea::placeholder {
-    color: var(--muted); font-style: italic; font-family: var(--serif); font-weight: 400;
-  }
-  .field input:focus, .field select:focus, .field textarea:focus {
-    border-bottom-color: var(--brass);
-  }
-  .field textarea {
-    resize: vertical;
-    min-height: 80px;
-    font-size: 17px;
-    line-height: 1.45;
+  .field input::placeholder { color: rgba(233,228,216,.35); }
+  .field input:focus, .field select:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 1px var(--gold);
   }
   .field select {
-    appearance: none; -webkit-appearance: none;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%23B08A4A' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%23bf9d18' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/></svg>");
     background-repeat: no-repeat;
-    background-position: right 4px center;
+    background-position: right 12px center;
     background-size: 12px;
-    padding-right: 24px;
-    color: var(--ink);
+    padding-right: 32px;
+    cursor: pointer;
   }
-  .field select option { background: var(--paper); color: var(--ink); }
-  .field.invalid input, .field.invalid select, .field.invalid textarea {
-    border-bottom-color: var(--rust);
-  }
+  .field select option { background: #1f2426; }
+  .field.invalid input, .field.invalid select { border-color: #c0392b; }
   .field .err {
-    margin-top: 6px;
-    color: var(--rust);
-    font-family: var(--mono);
-    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+    color: #e74c3c;
+    margin-top: 5px;
     display: none;
   }
   .field.invalid .err { display: block; }
 
-  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
-  @media (max-width: 440px) { .row-2 { grid-template-columns: 1fr; } }
-
-  .submit {
+  .btn-submit {
     width: 100%;
-    margin-top: 16px;
-    background: var(--green-800);
-    color: var(--cream);
-    border: 0;
-    border-radius: 0;
-    padding: 18px 22px;
-    font-family: var(--sans);
+    margin-top: 8px;
+    background: var(--primary);
+    color: var(--primary-fg);
+    border: 1px solid var(--primary);
+    padding: 14px 20px;
+    font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
     font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center; gap: 12px;
-    transition: background .2s, transform .12s, color .2s;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 48px;
+    transition: background .2s;
   }
-  .submit:hover { background: var(--green-900); color: var(--brass-2); }
-  .submit:active { transform: translateY(1px); }
-  .submit:disabled { opacity: 0.6; cursor: wait; }
-  .submit .arrow { transition: transform .25s; font-family: var(--serif); font-style: italic; font-size: 18px; letter-spacing: 0; text-transform: none; }
-  .submit:hover .arrow { transform: translateX(4px); }
+  .btn-submit:hover { background: var(--primary-dark); }
+  .btn-submit:disabled { opacity: .6; cursor: wait; }
 
-  .fineprint {
-    margin-top: 14px;
-    font-family: var(--mono);
-    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--muted);
-    text-align: center; line-height: 1.6;
+  /* form success state */
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 20px 0;
+    animation: rise .4s ease;
   }
-
-  /* Success */
-  .success { display: none; text-align: center; padding: 8px 0; animation: rise .45s ease; }
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: none; }
-  }
-  .success .seal {
-    width: 84px; height: 84px;
-    margin: 8px auto 22px;
+  @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .form-success-icon {
+    width: 64px; height: 64px;
+    border: 1px solid var(--gold);
     border-radius: 50%;
-    border: 1px solid var(--brass);
-    display: grid; place-items: center;
-    color: var(--brass);
-    font-family: var(--serif); font-style: italic; font-size: 36px;
-    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; color: var(--gold);
+    margin: 0 auto 18px;
   }
-  .success .seal::before {
-    content: ""; position: absolute; inset: 6px; border-radius: 50%;
-    border: 1px solid color-mix(in oklab, var(--brass) 35%, transparent);
-  }
-  .success h3 {
+  .form-success h4 {
     font-family: var(--serif);
-    font-size: 32px; font-weight: 500;
-    margin: 0 0 10px; letter-spacing: -0.01em; color: var(--green-900);
+    font-size: 26px; font-weight: 500;
+    margin-bottom: 10px;
   }
-  .success h3 em { font-style: italic; color: var(--brass); font-weight: 500; }
-  .success p { color: var(--ink-2); font-size: 14px; line-height: 1.6; max-width: 36ch; margin: 0 auto; }
+  .form-success h4 em { font-style: italic; color: var(--gold-2); }
+  .form-success p {
+    font-size: 14px; font-weight: 300;
+    color: rgba(233,228,216,.75);
+    line-height: 1.6;
+    max-width: 34ch; margin: 0 auto;
+  }
 
-  /* —— Footer —— */
+  /* ── Value props ── */
+  .props-intro {
+    max-width: 700px; margin: 0 auto;
+    text-align: center;
+  }
+  .props-intro .section-title { font-size: clamp(26px, 4vw, 44px); }
+  .props-intro p {
+    font-size: 16px; font-weight: 300;
+    color: rgba(233,228,216,.75);
+    line-height: 1.7;
+    margin-top: 20px;
+    max-width: 56ch; margin-left: auto; margin-right: auto;
+  }
+  .props-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 56px;
+  }
+  @media (min-width: 600px) { .props-grid { grid-template-columns: repeat(3, 1fr); } }
+  .prop-card {
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    padding: 32px;
+  }
+  .prop-num {
+    font-family: var(--serif);
+    font-size: 36px; font-weight: 500;
+    color: var(--gold-2);
+    opacity: .3;
+    margin-bottom: 16px;
+  }
+  .prop-card h3 {
+    font-family: var(--serif);
+    font-size: 19px; font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .prop-card p {
+    font-size: 13px; font-weight: 300;
+    color: rgba(233,228,216,.7);
+    line-height: 1.7;
+  }
+
+  /* ── 3-col image strip ── */
+  .img-strip-3 { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .img-strip-3 div { position: relative; aspect-ratio: 4/3; overflow: hidden; }
+  .img-strip-3 div img { width: 100%; height: 100%; object-fit: cover; }
+  .img-strip-caption {
+    background: var(--primary);
+    text-align: center;
+    padding: 12px 16px;
+    font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+    color: rgba(247,245,241,.7);
+  }
+
+  /* ── Audience ── */
+  .audience-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  @media (min-width: 600px) { .audience-grid { grid-template-columns: repeat(2, 1fr); } }
+  .audience-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(247,245,241,.1);
+  }
+  .audience-diamond {
+    margin-top: 6px;
+    width: 8px; height: 8px;
+    flex-shrink: 0;
+    transform: rotate(45deg);
+    border: 1px solid var(--gold-3);
+  }
+  .audience-item span {
+    font-size: 14px; font-weight: 300;
+    color: rgba(247,245,241,.9);
+    line-height: 1.6;
+  }
+
+  /* ── Learn ── */
+  .learn-list { margin-top: 0; }
+  .learn-item {
+    display: flex; gap: 40px; align-items: flex-start;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .learn-item:last-child { border-bottom: none; }
+  @media (min-width: 768px) { .learn-item { gap: 56px; } }
+  .learn-num {
+    font-family: var(--serif);
+    font-size: 40px; font-weight: 500;
+    color: var(--gold-2);
+    opacity: .6;
+    flex-shrink: 0; width: 56px;
+    line-height: 1;
+  }
+  .learn-item h3 {
+    font-family: var(--serif);
+    font-size: 21px; font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .learn-item p {
+    font-size: 14px; font-weight: 300;
+    color: rgba(233,228,216,.7);
+    line-height: 1.7;
+  }
+
+  /* ── 2-col image ── */
+  .img-duo { display: grid; grid-template-columns: 1fr 1fr; height: 260px; overflow: hidden; }
+  @media (min-width: 768px) { .img-duo { height: 320px; } }
+  .img-duo div { position: relative; overflow: hidden; }
+  .img-duo div img { width: 100%; height: 100%; object-fit: cover; }
+  .img-duo-overlay { position: absolute; inset: 0; background: rgba(17,85,81,.2); }
+
+  /* ── Final CTA section ── */
+  .final-cta {
+    position: relative;
+    padding: 96px 24px;
+    overflow: hidden;
+  }
+  .final-cta-bg {
+    position: absolute; inset: 0; z-index: 0;
+  }
+  .final-cta-bg img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.06); }
+  .final-cta-bg-overlay { position: absolute; inset: 0; background: rgba(17,85,81,.8); }
+  .final-cta-inner {
+    position: relative; z-index: 10;
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center;
+  }
+  @media (min-width: 900px) { .final-cta-inner { grid-template-columns: 1fr 460px; gap: 64px; } }
+  .final-cta-text h2 {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4.5vw, 48px);
+    font-weight: 500;
+    color: #fff;
+    line-height: 1.2;
+    margin-top: 8px;
+  }
+  .final-cta-text h2 em { font-style: italic; color: var(--gold-3); font-weight: 500; }
+  .final-cta-text p {
+    font-size: 16px; font-weight: 300;
+    color: rgba(255,255,255,.8);
+    line-height: 1.65;
+    margin-top: 16px;
+  }
+
+  /* ── FAQ ── */
+  .faq-title {
+    font-family: var(--serif);
+    font-size: 28px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: .08em;
+    margin-bottom: 40px;
+  }
+  .faq-item {
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    margin-bottom: 10px;
+  }
+  .faq-q {
+    width: 100%;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 20px 24px;
+    font-family: var(--serif);
+    font-size: 16px; font-weight: 500;
+    color: var(--fg);
+    text-transform: uppercase; letter-spacing: .06em;
+    text-align: left;
+  }
+  .faq-q svg { flex-shrink: 0; transition: transform .25s; color: var(--fg-muted); }
+  .faq-item.open .faq-q svg { transform: rotate(180deg); }
+  .faq-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height .35s ease, padding .25s;
+    font-size: 14px; font-weight: 300;
+    color: rgba(233,228,216,.75);
+    line-height: 1.7;
+    padding: 0 24px;
+  }
+  .faq-item.open .faq-body { max-height: 200px; padding: 0 24px 20px; }
+
+  /* ── Footer ── */
   footer {
-    border-top: 1px solid var(--line);
-    background: color-mix(in oklab, var(--cream) 70%, var(--cream-2));
+    background: var(--primary);
+    color: var(--primary-fg);
+    border-top: 1px solid rgba(var(--gold),.2);
+    padding: 48px 24px;
   }
   .foot-inner {
-    max-width: 1180px; margin: 0 auto;
-    padding: 28px 32px;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 16px; flex-wrap: wrap;
-    color: var(--muted);
-    font-family: var(--mono);
-    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    max-width: 1200px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: 24px;
   }
-  .foot-inner .mark {
-    font-family: var(--serif); font-size: 22px; font-weight: 500;
-    color: var(--green-800); letter-spacing: 0; text-transform: none;
+  .foot-inner img { height: 40px; object-fit: contain; filter: brightness(0) invert(1); opacity: .9; }
+  .foot-divider { height: 1px; width: 64px; background: rgba(191,157,24,.5); }
+  .foot-links {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 24px;
+    font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    color: rgba(247,245,241,.6);
   }
-  .foot-inner .mark em { font-style: italic; color: var(--brass); font-weight: 500; }
+  .foot-links a:hover { color: rgba(247,245,241,.9); }
+  .foot-copy {
+    font-size: 11px; color: rgba(247,245,241,.4);
+    text-align: center;
+  }
+
+  /* ── Reveal animation ── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.from-left { transform: translateX(-24px); }
+  .reveal.from-right { transform: translateX(24px); }
+  .reveal.scale-in { transform: scale(1.06); }
+  .reveal.visible { opacity: 1; transform: none; }
 </style>
 </head>
 <body>
 
-<header class="top" data-screen-label="Topbar">
-  <div class="top-inner">
-    <div class="wordmark">Frive<span class="dot"></span><em>ERP</em></div>
-    <span class="live"><span class="pulse"></span> Encontro ao vivo · vagas limitadas</span>
+<!-- Progress bar -->
+<div id="progress"></div>
+
+<!-- Announcement bar -->
+<div class="announce">
+  Masterclass Gratuita &nbsp;|&nbsp; 02/06 às 19h &nbsp;|&nbsp; Online e ao vivo &nbsp;|&nbsp; Vagas limitadas
+</div>
+
+<!-- ── Hero ── -->
+<header class="hero">
+  <div class="hero-bg">
+    <img src="https://masterclass-boutique--f4259h9zbn.replit.app/assets/casa4-B6ZvkyyU.jpg" alt="Obra Boutique Construtora" />
+    <div class="hero-bg-overlay"></div>
+  </div>
+
+  <nav class="hero-nav">
+    <img src="https://masterclass-boutique--f4259h9zbn.replit.app/assets/logo-boutique-B1SX_fLI.webp" alt="Boutique Construtora" />
+    <button class="btn-nav" onclick="scrollToForm()">Garantir vaga</button>
+  </nav>
+
+  <div class="hero-body">
+    <div class="hero-tags">
+      <span class="hero-tag">Gratuita</span>
+      <span class="hero-tag">Online</span>
+      <span class="hero-tag">Ao vivo</span>
+    </div>
+
+    <h1>Foco do Cliente<br><em>e Posicionamento</em></h1>
+    <p class="hero-sub">Como construir valor antes, durante e depois da obra — e parar de competir por preço.</p>
+
+    <p class="hero-date">02 de Junho, 19h</p>
+    <div class="countdown" id="countdown">
+      <div class="cd-block"><div class="cd-box" id="cd-dias">00</div><span class="cd-label">Dias</span></div>
+      <div class="cd-block"><div class="cd-box" id="cd-horas">00</div><span class="cd-label">Horas</span></div>
+      <div class="cd-block"><div class="cd-box" id="cd-min">00</div><span class="cd-label">Minutos</span></div>
+      <div class="cd-block"><div class="cd-box" id="cd-seg">00</div><span class="cd-label">Segundos</span></div>
+    </div>
+
+    <div class="hero-cta-row">
+      <button class="btn-cta" onclick="scrollToForm()">Garantir minha vaga gratuita</button>
+      <p class="hero-aside-text">Uma aula para arquitetos, engenheiros e donos de construtoras que entregam valor mas sentem que o cliente nem sempre percebe.</p>
+    </div>
   </div>
 </header>
 
-<main data-screen-label="Webinar LP">
-  <!-- LEFT: editorial column -->
-  <section>
-    <div class="eyebrow"><span class="bar"></span> Encontro online · gratuito · 23 maio</div>
-
-    <h1 class="display">
-      A obra <span class="it">sob controle</span>.
-      <span class="small">Um encontro reservado para construtoras que entregam autoria — e querem operar com a mesma elegância nos bastidores.</span>
-    </h1>
-
-    <p class="lede">
-      Em sessenta minutos, abrimos os bastidores do <strong>ERP Frive</strong> — o sistema escolhido pelas construtoras boutique do país para conduzir orçamento, canteiro, compras e financeiro em um só lugar. Sem planilhas paralelas. Sem surpresas no fim do mês.
-    </p>
-
-    <div class="meta">
-      <div class="item">
-        <div class="k">Data</div>
-        <div class="v">Quinta · <em>23 mai</em></div>
+<!-- ── About ── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal from-left">
+        <img src="https://masterclass-boutique--f4259h9zbn.replit.app/assets/estevao-DXER9eLv.jpg" alt="Estevão Farkasvölgyi — Boutique Construtora" />
       </div>
-      <div class="item">
-        <div class="k">Horário</div>
-        <div class="v">19h <em>(BRT)</em></div>
-      </div>
-      <div class="item">
-        <div class="k">Formato</div>
-        <div class="v">Online · <em>ao vivo</em></div>
-      </div>
-    </div>
-
-    <div class="programa">
-      <div class="programa-head">— Programa do encontro</div>
-      <ol>
-        <li>
-          <span class="n">i</span>
-          <span class="t">O fim das planilhas paralelas — uma só <em>fonte de verdade</em> por obra.</span>
-        </li>
-        <li>
-          <span class="n">ii</span>
-          <span class="t">O método Frive: orçamento, compras e financeiro <em>integrados</em>.</span>
-        </li>
-        <li>
-          <span class="n">iii</span>
-          <span class="t">Demonstração ao vivo — incluindo o <em>app de canteiro</em>.</span>
-        </li>
-      </ol>
-    </div>
-
-    <div class="signature">
-      <div class="avatar" aria-hidden="true"></div>
-      <div class="who">
-        Conduzido por <em>Luísa Caldeira</em>
-        <span class="role">Co-fundadora · Frive</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- RIGHT: form -->
-  <aside class="form-card" id="formCard" data-screen-label="Form">
-    <div id="formInner">
-      <div class="form-head">
-        <span class="seats"><span class="pulse"></span> 38 cadeiras restantes</span>
-        <div class="t">Reserve sua <em>cadeira</em>.</div>
-        <p class="s">Preencha seus dados — o link da transmissão segue direto para o seu e-mail.</p>
-      </div>
-
-      <form id="leadForm" novalidate>
-        <div class="field">
-          <label for="nome">Nome <span class="req">obrigatório</span></label>
-          <input type="text" id="nome" name="nome" placeholder="Como você assina" autocomplete="name" />
-          <div class="err">Diga seu nome completo</div>
+      <div>
+        <div class="reveal">
+          <div class="deco-line"></div>
+          <span class="eyebrow">Com quem você vai aprender</span>
+          <h2 class="about-name">Estevão Farkasvölgyi</h2>
         </div>
-
-        <div class="field">
-          <label for="email">E-mail <span class="req">obrigatório</span></label>
-          <input type="email" id="email" name="email" placeholder="voce@empresa.com" autocomplete="email" />
-          <div class="err">Informe um e-mail válido</div>
+        <div class="reveal">
+          <p class="about-bio">Engenheiro civil à frente da Boutique Construtora, empresa especializada em obras de alto luxo com foco em precisão técnica, compatibilização, gestão e experiência do cliente.</p>
+          <p class="about-bio">A Boutique une engenharia, método e visão de negócio para mostrar que uma obra bem conduzida não depende de improviso — depende de processo, cultura e posicionamento.</p>
+          <button class="btn-outline" onclick="scrollToForm()">Participar da Masterclass</button>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="row-2">
-          <div class="field">
-            <label for="idade">Idade <span class="req">*</span></label>
-            <input type="number" id="idade" name="idade" min="16" max="99" placeholder="ex. 38" inputmode="numeric" />
-            <div class="err">Entre 16 e 99</div>
+<!-- ── Registration form (primary bg) ── -->
+<section class="section section--primary" id="inscricao">
+  <div class="section-inner">
+    <div class="form-section-grid">
+      <div class="form-section-lead reveal from-left">
+        <div class="deco-line"></div>
+        <h2 class="section-title">Garanta sua vaga.<br><em>É gratuito.</em></h2>
+        <p>Preencha ao lado e receba o link de acesso pelo WhatsApp antes do evento.</p>
+      </div>
+      <div class="reveal">
+        <div class="form-card" id="formCard1">
+          <div id="formInner1">
+            <h3>Garanta sua vaga gratuita</h3>
+            <form id="leadForm1" novalidate>
+              <div class="field">
+                <label for="nome1">Nome completo</label>
+                <input type="text" id="nome1" name="nome" placeholder="Seu nome" autocomplete="name" />
+                <div class="err">Informe seu nome completo</div>
+              </div>
+              <div class="field">
+                <label for="email1">E-mail profissional</label>
+                <input type="email" id="email1" name="email" placeholder="seu@email.com" autocomplete="email" />
+                <div class="err">Informe um e-mail válido</div>
+              </div>
+              <div class="field">
+                <label for="whatsapp1">WhatsApp</label>
+                <input type="tel" id="whatsapp1" name="whatsapp" placeholder="(11) 99999-9999" autocomplete="tel" inputmode="tel" />
+                <div class="err">Informe seu WhatsApp</div>
+              </div>
+              <div class="field">
+                <label for="cargo1">Cargo</label>
+                <select id="cargo1" name="cargo">
+                  <option value="" disabled selected>Selecione</option>
+                  <option>Dono(a) de construtora</option>
+                  <option>Engenheiro(a) civil</option>
+                  <option>Arquiteto(a)</option>
+                  <option>Gestor(a) de obras</option>
+                  <option>Designer de interiores</option>
+                  <option>Outro</option>
+                </select>
+                <div class="err">Selecione seu cargo</div>
+              </div>
+              <button type="submit" class="btn-submit">Quero garantir minha vaga gratuita</button>
+            </form>
           </div>
-          <div class="field">
-            <label for="cargo">Cargo <span class="req">*</span></label>
-            <select id="cargo" name="cargo">
-              <option value="" disabled selected>Selecione</option>
-              <option>Sócio(a) / Diretor(a)</option>
-              <option>Engenheiro(a)</option>
-              <option>Arquiteto(a)</option>
-              <option>Gerente de obra</option>
-              <option>Gestor(a) financeiro</option>
-              <option>Comprador(a) / Suprimentos</option>
-              <option>Outro</option>
-            </select>
-            <div class="err">Escolha um cargo</div>
+          <div class="form-success" id="successBox1">
+            <div class="form-success-icon">✓</div>
+            <h4>Vaga <em>garantida</em>.</h4>
+            <p>Enviamos o link da transmissão para o seu WhatsApp. Nos vemos dia 02 de junho às 19h.</p>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="field">
-          <label for="dificuldade">Maior dificuldade hoje <span class="req">*</span></label>
-          <textarea id="dificuldade" name="dificuldade" rows="3" placeholder="Conte, em poucas linhas, o gargalo que você quer resolver."></textarea>
-          <div class="err">Conte sua maior dificuldade</div>
+<!-- ── Value props ── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="props-intro reveal">
+      <div class="deco-line deco-line--center"></div>
+      <h2 class="section-title">O cliente não compra apenas uma obra.<br><em>Ele compra confiança.</em></h2>
+      <p>Em obras de alto valor, quem vence a negociação não é quem tem o menor preço — é quem transmite mais método, clareza e segurança.</p>
+    </div>
+    <div class="props-grid">
+      <div class="prop-card reveal">
+        <div class="prop-num">01</div>
+        <h3>Percepção de valor</h3>
+        <p>Começa antes do orçamento. A forma como você comunica define o que o cliente está disposto a pagar.</p>
+      </div>
+      <div class="prop-card reveal">
+        <div class="prop-num">02</div>
+        <h3>Foco no cliente</h3>
+        <p>Entre na obra como se fosse o seu cliente. Enxergue cada detalhe pelos olhos de quem vai viver ali — e entregue com essa mesma exigência.</p>
+      </div>
+      <div class="prop-card reveal">
+        <div class="prop-num">03</div>
+        <h3>Posicionamento real</h3>
+        <p>Não é aparência. É coerência entre o que você entrega e como o cliente percebe essa entrega.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3-image strip ── -->
+<div class="img-strip-3">
+  <div class="reveal scale-in"><img src="https://masterclass-boutique--f4259h9zbn.replit.app/assets/casa1-D20D5ELG.jpg" alt="Obra Boutique Construtora" /></div>
+  <div class="reveal scale-in"><img src="https://masterclass-boutique--f4259h9zbn.replit.app/assets/casa2-CDSD8H9V.jpg" alt="Obra Boutique Construtora" /></div>
+  <div class="reveal scale-in"><img src="https://masterclass-boutique--f4259h9zbn.replit.app/assets/casa6-DyfhGokD.jpg" alt="Obra Boutique Construtora" /></div>
+</div>
+<div class="img-strip-caption">Obras executadas pela Boutique Construtora</div>
+
+<!-- ── Audience ── -->
+<section class="section section--primary">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center; margin-bottom: 48px;">
+      <div class="deco-line deco-line--center" style="background:var(--gold-2);"></div>
+      <h2 class="section-title">Essa Masterclass é para você</h2>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-item reveal from-left"><span class="audience-diamond"></span><span>Dono de construtora que quer posicionar melhor sua empresa e atrair clientes alinhados ao seu padrão</span></div>
+      <div class="audience-item reveal from-right"><span class="audience-diamond"></span><span>Arquiteto que quer comunicar mais valor e fortalecer sua autoridade</span></div>
+      <div class="audience-item reveal from-left"><span class="audience-diamond"></span><span>Engenheiro civil que quer posicionar melhor sua construtora ou escritório</span></div>
+      <div class="audience-item reveal from-right"><span class="audience-diamond"></span><span>Gestor de obras que quer estruturar uma jornada mais clara para o cliente</span></div>
+      <div class="audience-item reveal from-left"><span class="audience-diamond"></span><span>Profissional que entrega qualidade mas sente que o cliente não vê o que está por trás</span></div>
+      <div class="audience-item reveal from-right"><span class="audience-diamond"></span><span>Designer de interiores que quer melhorar a percepção da sua entrega</span></div>
+    </div>
+    <div class="reveal" style="text-align:center; margin-top: 48px;">
+      <button class="btn-cta" onclick="scrollToForm()">Quero garantir minha vaga gratuita</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── What you'll learn ── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="reveal from-left" style="margin-bottom: 48px;">
+      <div class="deco-line"></div>
+      <h2 class="section-title">O que você vai aprender</h2>
+    </div>
+    <div class="learn-list">
+      <div class="learn-item reveal from-left">
+        <span class="learn-num">01</span>
+        <div>
+          <h3>Como o cliente percebe valor</h3>
+          <p>A percepção começa no primeiro contato — não no resultado final. Aprenda a trabalhar cada etapa da jornada.</p>
         </div>
+      </div>
+      <div class="learn-item reveal from-left">
+        <span class="learn-num">02</span>
+        <div>
+          <h3>Como posicionar com mais autoridade</h3>
+          <p>Sair do discurso genérico e comunicar diferenciais reais: método, compatibilização, organização, processo.</p>
+        </div>
+      </div>
+      <div class="learn-item reveal from-left">
+        <span class="learn-num">03</span>
+        <div>
+          <h3>Como transformar bastidores em argumento</h3>
+          <p>Planejamento, projeto executivo, gestão de fornecedores — tudo isso pode ser um diferencial comercial.</p>
+        </div>
+      </div>
+      <div class="learn-item reveal from-left">
+        <span class="learn-num">04</span>
+        <div>
+          <h3>Como atrair clientes mais alinhados</h3>
+          <p>Posicionamento certo filtra o público, educa o cliente e cria uma relação mais profissional desde o início.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <button type="submit" class="submit">
-          Reservar minha cadeira
-          <span class="arrow">→</span>
+<!-- ── 2-col image ── -->
+<div class="img-duo">
+  <div class="reveal scale-in"><img src="https://masterclass-boutique--f4259h9zbn.replit.app/assets/casa3-qEIzm0Oz.jpg" alt="Obra Boutique Construtora" /><div class="img-duo-overlay"></div></div>
+  <div class="reveal scale-in"><img src="https://masterclass-boutique--f4259h9zbn.replit.app/assets/casa5-BxyCSQEo.jpg" alt="Obra Boutique Construtora" /><div class="img-duo-overlay"></div></div>
+</div>
+
+<!-- ── Final CTA with second form ── -->
+<div class="final-cta">
+  <div class="final-cta-bg">
+    <img src="https://masterclass-boutique--f4259h9zbn.replit.app/assets/casa1-D20D5ELG.jpg" alt="Obra Boutique Construtora" />
+    <div class="final-cta-bg-overlay"></div>
+  </div>
+  <div class="final-cta-inner">
+    <div class="final-cta-text reveal from-left">
+      <div class="deco-line" style="background:var(--gold-2);"></div>
+      <h2>Participe ao vivo.<br><em>02 de Junho, 19h.</em></h2>
+      <p>Receba o acesso pelo WhatsApp e aprenda como posicionar sua empresa para atrair os clientes certos.</p>
+    </div>
+    <div class="reveal">
+      <div class="form-card" id="formCard2">
+        <div id="formInner2">
+          <h3>Garanta sua vaga gratuita</h3>
+          <form id="leadForm2" novalidate>
+            <div class="field">
+              <label for="nome2">Nome completo</label>
+              <input type="text" id="nome2" name="nome" placeholder="Seu nome" autocomplete="name" />
+              <div class="err">Informe seu nome completo</div>
+            </div>
+            <div class="field">
+              <label for="email2">E-mail profissional</label>
+              <input type="email" id="email2" name="email" placeholder="seu@email.com" autocomplete="email" />
+              <div class="err">Informe um e-mail válido</div>
+            </div>
+            <div class="field">
+              <label for="whatsapp2">WhatsApp</label>
+              <input type="tel" id="whatsapp2" name="whatsapp" placeholder="(11) 99999-9999" autocomplete="tel" inputmode="tel" />
+              <div class="err">Informe seu WhatsApp</div>
+            </div>
+            <div class="field">
+              <label for="cargo2">Cargo</label>
+              <select id="cargo2" name="cargo">
+                <option value="" disabled selected>Selecione</option>
+                <option>Dono(a) de construtora</option>
+                <option>Engenheiro(a) civil</option>
+                <option>Arquiteto(a)</option>
+                <option>Gestor(a) de obras</option>
+                <option>Designer de interiores</option>
+                <option>Outro</option>
+              </select>
+              <div class="err">Selecione seu cargo</div>
+            </div>
+            <button type="submit" class="btn-submit">Quero garantir minha vaga gratuita</button>
+          </form>
+        </div>
+        <div class="form-success" id="successBox2">
+          <div class="form-success-icon">✓</div>
+          <h4>Vaga <em>garantida</em>.</h4>
+          <p>Enviamos o link da transmissão para o seu WhatsApp. Nos vemos dia 02 de junho às 19h.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FAQ ── -->
+<section class="section">
+  <div class="section-inner--narrow">
+    <div class="reveal">
+      <div class="deco-line"></div>
+      <h2 class="faq-title">Perguntas frequentes</h2>
+    </div>
+    <div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          A Masterclass é gratuita?
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
         </button>
-        <p class="fineprint">Confidencial · 100% gratuito · Sem compromisso</p>
-      </form>
+        <div class="faq-body">Sim, 100% gratuita. Basta se cadastrar e você receberá o link de acesso pelo WhatsApp.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Quando e como será?
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="faq-body">Será no dia 02 de junho de 2026, às 19h (horário de Brasília). O evento é online e ao vivo — você assiste pelo link que enviaremos no seu WhatsApp.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Vou receber o link onde?
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="faq-body">Pelo WhatsApp, no número que você cadastrar no formulário. Fique atento às mensagens próximo à data.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Preciso já trabalhar com obras de alto luxo?
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="faq-body">Não. A Masterclass é para quem quer elevar o nível da sua entrega e posicionamento, independente do ticket atual dos seus projetos.</div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <div class="success" id="successBox">
-      <div class="seal">✓</div>
-      <h3>Cadeira <em>reservada</em>.</h3>
-      <p>Enviamos o link da transmissão para o seu e-mail. Nos vemos quinta, 23 de maio, às 19h.</p>
-    </div>
-  </aside>
-</main>
-
+<!-- ── Footer ── -->
 <footer>
   <div class="foot-inner">
-    <div class="mark">Frive <em>ERP</em></div>
-    <div>© 2026 · Software para construção civil · São Paulo</div>
+    <img src="https://masterclass-boutique--f4259h9zbn.replit.app/assets/logo-boutique-B1SX_fLI.webp" alt="Boutique Construtora" />
+    <div class="foot-divider"></div>
+    <div class="foot-links">
+      <a href="#">Política de Privacidade</a>
+      <a href="#">Termos de Uso</a>
+      <a href="#">Instagram</a>
+      <a href="#">WhatsApp</a>
+    </div>
+    <p class="foot-copy">Boutique Construtora / Boutique Consultoria e Educação — Todos os direitos reservados.</p>
   </div>
 </footer>
 
 <script>
-  (function () {
-    const STORAGE_KEY = 'frive_webinar_registration';
-    const THANK_YOU = '/obrigado.html';
+(function () {
+  const ENDPOINT = '/api/lp-lead';
+  const STORAGE_KEY = 'boutique_masterclass_reg';
+  const THANK_YOU = '/obrigado.html';
 
-    // If already registered, send them to the thank-you page on load.
-    try {
-      const existing = localStorage.getItem(STORAGE_KEY);
-      if (existing && JSON.parse(existing) && JSON.parse(existing).nome) {
-        window.location.replace(THANK_YOU);
-        return;
-      }
-    } catch (_) { /* ignore parse errors */ }
+  /* ── Already registered ── */
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+    if (saved && saved.email) { window.location.replace(THANK_YOU); return; }
+  } catch (_) {}
 
-    const form = document.getElementById('leadForm');
-    const fields = ['nome', 'email', 'idade', 'cargo', 'dificuldade'];
-    const ENDPOINT = 'https://leads-phi-lac.vercel.app/api/lp-lead';
+  /* ── Scroll progress bar ── */
+  const bar = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const pct = doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
+    bar.style.transform = 'scaleX(' + pct + ')';
+  }, { passive: true });
 
-    function validateOne(id) {
-      const el = document.getElementById(id);
-      const wrap = el.closest('.field');
-      const v = (el.value || '').trim();
-      let bad = false;
-      if (id === 'nome') bad = v.length < 2 || !v.includes(' ');
-      if (id === 'email') bad = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-      if (id === 'idade') {
-        const n = parseInt(v, 10);
-        bad = !v || isNaN(n) || n < 16 || n > 99;
-      }
-      if (id === 'cargo') bad = !v;
-      if (id === 'dificuldade') bad = v.length < 6;
-      wrap.classList.toggle('invalid', bad);
-      return !bad;
+  /* ── Countdown ── */
+  const TARGET = new Date('2026-06-02T22:00:00Z'); // 19h BRT = 22h UTC
+  function pad(n) { return String(Math.max(0, n)).padStart(2, '0'); }
+  function tick() {
+    const diff = TARGET - Date.now();
+    if (diff <= 0) {
+      ['cd-dias','cd-horas','cd-min','cd-seg'].forEach(id => document.getElementById(id).textContent = '00');
+      return;
     }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-dias').textContent = pad(d);
+    document.getElementById('cd-horas').textContent = pad(h);
+    document.getElementById('cd-min').textContent = pad(m);
+    document.getElementById('cd-seg').textContent = pad(s);
+  }
+  tick(); setInterval(tick, 1000);
 
-    fields.forEach(id => {
-      const el = document.getElementById(id);
-      el.addEventListener('input', () => {
-        if (el.closest('.field').classList.contains('invalid')) validateOne(id);
-      });
-      el.addEventListener('change', () => validateOne(id));
+  /* ── Scroll reveal ── */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        // animate deco-lines inside the revealed element
+        e.target.querySelectorAll('.deco-line').forEach(l => l.classList.add('visible'));
+        // if this element IS a deco-line
+        if (e.target.classList.contains('deco-line')) e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal, .deco-line').forEach(el => io.observe(el));
+
+  /* ── WhatsApp mask ── */
+  function maskPhone(input) {
+    input.addEventListener('input', () => {
+      let v = input.value.replace(/\D/g, '').slice(0, 11);
+      if (v.length > 10) v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+      else if (v.length > 6) v = v.replace(/^(\d{2})(\d{4,5})(\d{0,4})$/, '($1) $2-$3');
+      else if (v.length > 2) v = v.replace(/^(\d{2})(\d+)$/, '($1) $2');
+      else if (v.length > 0) v = v.replace(/^(\d+)$/, '($1');
+      input.value = v;
+    });
+  }
+  maskPhone(document.getElementById('whatsapp1'));
+  maskPhone(document.getElementById('whatsapp2'));
+
+  /* ── Scroll to form ── */
+  window.scrollToForm = function () {
+    document.getElementById('inscricao').scrollIntoView({ behavior: 'smooth' });
+  };
+
+  /* ── FAQ accordion ── */
+  window.toggleFaq = function (btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  };
+
+  /* ── Form validation & submit ── */
+  function validateField(el, formId) {
+    const id = el.id;
+    const wrap = el.closest('.field');
+    const v = (el.value || '').trim();
+    let bad = false;
+    if (id === 'nome' + formId || id.startsWith('nome')) bad = v.length < 2 || !v.includes(' ');
+    else if (id.startsWith('email')) bad = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    else if (id.startsWith('whatsapp')) bad = v.replace(/\D/g,'').length < 10;
+    else if (id.startsWith('cargo')) bad = !v;
+    wrap.classList.toggle('invalid', bad);
+    return !bad;
+  }
+
+  function setupForm(formId, suffix) {
+    const form = document.getElementById('leadForm' + suffix);
+    const fields = form.querySelectorAll('input, select');
+    fields.forEach(el => {
+      el.addEventListener('input', () => { if (el.closest('.field').classList.contains('invalid')) validateField(el, suffix); });
+      el.addEventListener('change', () => validateField(el, suffix));
     });
 
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const ok = fields.map(validateOne).every(Boolean);
-      if (!ok) {
-        const firstBad = form.querySelector('.field.invalid input, .field.invalid select, .field.invalid textarea');
-        if (firstBad) firstBad.focus();
+      let allOk = true;
+      fields.forEach(el => { if (!validateField(el, suffix)) allOk = false; });
+      if (!allOk) {
+        const bad = form.querySelector('.field.invalid input, .field.invalid select');
+        if (bad) bad.focus();
         return;
       }
 
-      // Build the JSON payload
-      const payload = {
-        nome: document.getElementById('nome').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        idade: parseInt(document.getElementById('idade').value, 10),
-        cargo: document.getElementById('cargo').value,
-        dificuldade: document.getElementById('dificuldade').value.trim(),
-        webinar: {
-          titulo: 'ERP Frive · A obra sob controle',
-          data: '2026-05-23',
-          horario: '19:00',
-          fuso: 'BRT',
-          formato: 'Online ao vivo'
-        },
-        protocolo: 'FR-' + Math.floor(100000 + Math.random() * 899999),
-        registradoEm: new Date().toISOString()
-      };
+      const nome = form.querySelector('[name=nome]').value.trim();
+      const email = form.querySelector('[name=email]').value.trim();
+      const whatsapp = form.querySelector('[name=whatsapp]').value.trim();
+      const cargo = form.querySelector('[name=cargo]').value;
 
-      const btn = form.querySelector('.submit');
+      const btn = form.querySelector('.btn-submit');
       btn.disabled = true;
-      btn.innerHTML = 'Enviando<span class="arrow">…</span>';
+      btn.textContent = 'Enviando...';
 
-      fetch(ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      })
-      .then(async (r) => {
+      try {
+        const r = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nome, email, whatsapp, cargo }),
+        });
         const body = await r.json().catch(() => ({}));
-        if (!r.ok) throw new Error(body.error || ('HTTP ' + r.status));
-        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(payload)); } catch (_) {}
+        if (!r.ok) throw new Error(body.error || 'HTTP ' + r.status);
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ email })); } catch (_) {}
         window.location.assign(THANK_YOU);
-      })
-      .catch((err) => {
-        console.error('Lead submit failed:', err);
+      } catch (err) {
+        console.error('Submit error:', err);
         btn.disabled = false;
-        btn.innerHTML = 'Tentar novamente<span class="arrow">→</span>';
-        alert('Não conseguimos registrar agora. Tente novamente em instantes.');
-      });
+        btn.textContent = 'Tentar novamente';
+      }
     });
-  })();
-</script>
+  }
 
+  setupForm(1, 1);
+  setupForm(2, 2);
+})();
+</script>
 </body>
 </html>

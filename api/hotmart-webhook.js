@@ -1,7 +1,12 @@
 const HOTTOK = process.env.HOTTOK;
 const AC_API_URL = process.env.AC_API_URL;
 const AC_API_KEY = process.env.AC_API_KEY;
-const TAG_NAME = 'COMPROU BOUTIQUE DRIVE';
+
+// Map Hotmart product IDs to ActiveCampaign tag names
+const PRODUCT_TAGS = {
+  '5286969': 'DESVENDANDO COMPROU',
+};
+const DEFAULT_TAG = 'COMPROU BOUTIQUE DRIVE';
 
 async function acFetch(path, method = 'GET', body) {
   const res = await fetch(`${AC_API_URL}/api/3${path}`, {
@@ -19,12 +24,12 @@ async function acFetch(path, method = 'GET', body) {
   return res.json();
 }
 
-async function getOrCreateTag() {
-  const { tags } = await acFetch(`/tags?search=${encodeURIComponent(TAG_NAME)}`);
+async function getOrCreateTag(tagName) {
+  const { tags } = await acFetch(`/tags?search=${encodeURIComponent(tagName)}`);
   if (tags && tags.length > 0) return tags[0].id;
 
   const { tag } = await acFetch('/tags', 'POST', {
-    tag: { tag: TAG_NAME, tagType: 'contact', description: '' },
+    tag: { tag: tagName, tagType: 'contact', description: '' },
   });
   return tag.id;
 }
@@ -66,17 +71,20 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Buyer email missing in payload' });
   }
 
+  const productId = String(data?.product?.id ?? '');
+  const tagName = PRODUCT_TAGS[productId] ?? DEFAULT_TAG;
+
   const [firstName, ...rest] = (buyer.name ?? '').trim().split(/\s+/);
   const lastName = rest.join(' ');
 
   try {
     const [contactId, tagId] = await Promise.all([
       upsertContact(buyer.email, firstName, lastName),
-      getOrCreateTag(),
+      getOrCreateTag(tagName),
     ]);
     await addTagToContact(contactId, tagId);
 
-    console.log(`Tagged contact ${buyer.email} (id ${contactId}) with "${TAG_NAME}"`);
+    console.log(`Tagged contact ${buyer.email} (id ${contactId}) with "${tagName}"`);
     return res.status(200).json({ success: true, contact: contactId });
   } catch (err) {
     console.error('Webhook processing error:', err.message);
