@@ -4,9 +4,9 @@ const AC_API_KEY = process.env.AC_API_KEY;
 
 // Map Hotmart product IDs to ActiveCampaign tag names
 const PRODUCT_TAGS = {
+  '4482584': 'COMPROU BOUTIQUE DRIVE',
   '5286969': 'DESVENDANDO COMPROU',
 };
-const DEFAULT_TAG = 'COMPROU BOUTIQUE DRIVE';
 
 async function acFetch(path, method = 'GET', body) {
   const res = await fetch(`${AC_API_URL}/api/3${path}`, {
@@ -61,7 +61,10 @@ export default async function handler(req, res) {
 
   const { event, data } = req.body ?? {};
 
-  const ACCEPTED_EVENTS = new Set(['PURCHASE_APPROVED', 'PURCHASE_COMPLETE']);
+    const PURCHASE_EVENTS = new Set(['PURCHASE_APPROVED', 'PURCHASE_COMPLETE']);
+  const EXPIRED_EVENTS  = new Set(['PURCHASE_EXPIRED', 'PURCHASE_CANCELLED']);
+  const ACCEPTED_EVENTS = new Set([...PURCHASE_EVENTS, ...EXPIRED_EVENTS]);
+
   if (!ACCEPTED_EVENTS.has(event)) {
     return res.status(200).json({ message: `Event "${event}" ignored` });
   }
@@ -71,8 +74,22 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Buyer email missing in payload' });
   }
 
-  const productId = String(data?.product?.id ?? '');
-  const tagName = PRODUCT_TAGS[productId] ?? DEFAULT_TAG;
+  const productId = String(
+    data?.product?.id ??
+    data?.purchase?.product?.id ??
+    data?.subscription?.plan?.product?.id ??
+    ''
+  );
+  console.log(`Webhook event=${event} productId=${productId} buyer=${buyer?.email}`);
+
+  const tagName = EXPIRED_EVENTS.has(event)
+    ? 'COMPRA EXPIRADA'
+    : PRODUCT_TAGS[productId];
+
+  if (!tagName) {
+    console.warn(`No tag mapped for product "${productId}", event "${event}" — ignoring`);
+    return res.status(200).json({ message: `No tag mapped for product ${productId}` });
+  }
 
   const [firstName, ...rest] = (buyer.name ?? '').trim().split(/\s+/);
   const lastName = rest.join(' ');
