@@ -97,6 +97,11 @@ export default async function handler(req, res) {
     return res.status(200).json({ success: true, contact: contactId });
   } catch (err) {
     console.error('LP lead error:', err.message);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({
+      error: 'Internal server error',
+      debug: err.message,
+      hasUrl: !!AC_API_URL,
+      hasKey: !!AC_API_KEY,
+    });
   }
 }

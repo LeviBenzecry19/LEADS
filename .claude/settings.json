@@ -4,7 +4,10 @@
       "Bash(gh auth *)",
       "PowerShell($g = Get-Command gh -ErrorAction SilentlyContinue; if \\($g\\) { $g.Source; gh auth status } else { \"gh not found\" })",
       "Bash(git remote *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(grep -n \"fetch\\\\|/api/\\\\|obrigado\\\\|location\\\\|submit\\\\|TENTAR\\\\|Tentar\\\\|async \\(\\\\|\\\\.catch\\\\|\\\\.then\\\\|sendLead\\\\|handleSubmit\" index.html)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }
