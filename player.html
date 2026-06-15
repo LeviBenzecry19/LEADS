@@ -39,50 +39,73 @@
   /* ── Nav ── */
   nav {
     background: var(--primary);
-    padding: 18px 24px;
+    padding: 16px 32px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 16px;
+    justify-content: space-between;
+    gap: 20px;
     flex-shrink: 0;
     position: relative;
     border-bottom: 1px solid rgba(191,157,24,.25);
   }
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
   nav img {
-    height: 56px;
+    height: 46px;
     object-fit: contain;
     filter: brightness(0) invert(1);
-    opacity: .9;
+    opacity: .92;
   }
-  .nav-badge {
+  .nav-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding-left: 18px;
+    border-left: 1px solid rgba(191,157,24,.3);
+  }
+  .nav-meta-k {
+    font-size: 9px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: rgba(247,245,241,.5);
+  }
+  .nav-meta-v {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--gold-2);
+    line-height: 1;
+  }
+  .nav-cta {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-size: 10px;
-    letter-spacing: .18em;
+    gap: 12px;
+    font-size: 11px;
+    letter-spacing: .14em;
     text-transform: uppercase;
-    color: rgba(247,245,241,.6);
-    border: 1px solid rgba(191,157,24,.4);
-    padding: 6px 14px;
-    white-space: nowrap;
-    position: absolute;
-    right: 24px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  @media (max-width: 520px) {
-    .nav-badge { display: none; }
-  }
-  .nav-badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
+    font-weight: 600;
+    color: var(--primary);
     background: var(--gold-2);
-    animation: pulse 2s ease-in-out infinite;
+    padding: 14px 24px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background .25s ease, transform .25s ease;
   }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: .35; }
+  .nav-cta:hover {
+    background: var(--gold-3, #ebd060);
+    transform: translateY(-1px);
+  }
+  .nav-cta .arrow { transition: transform .25s ease; }
+  .nav-cta:hover .arrow { transform: translateX(4px); }
+
+  @media (max-width: 720px) {
+    nav { padding: 14px 18px; }
+    .nav-meta { display: none; }
+    .nav-cta .cta-full { display: none; }
+    .nav-cta::after { content: 'Inscrever-se'; }
   }
 
   /* ── Player section ── */
@@ -255,7 +278,17 @@
 <body>
 
 <nav>
-  <img src="https://masterclass-boutique--f4259h9zbn.replit.app/assets/logo-boutique-B1SX_fLI.webp" alt="Boutique Construtora" style="width: 100px; height: 100px" />
+  <div class="nav-left">
+    <img src="https://masterclass-boutique--f4259h9zbn.replit.app/assets/logo-boutique-B1SX_fLI.webp" alt="Boutique Construtora" />
+    <div class="nav-meta">
+      <span class="nav-meta-k">Masterclass</span>
+      <span class="nav-meta-v">22 jun · 19h</span>
+    </div>
+  </div>
+  <a class="nav-cta" href="index.html#inscricao">
+    <span class="cta-full">Gostaria de me inscrever na masterclass</span>
+    <span class="arrow">&rarr;</span>
+  </a>
 </nav>
 
 <div class="player-wrap">
