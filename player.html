@@ -39,16 +39,17 @@
   /* ── Nav ── */
   nav {
     background: var(--primary);
-    padding: 14px 24px;
+    padding: 18px 24px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: 16px;
     flex-shrink: 0;
+    position: relative;
     border-bottom: 1px solid rgba(191,157,24,.25);
   }
   nav img {
-    height: 34px;
+    height: 56px;
     object-fit: contain;
     filter: brightness(0) invert(1);
     opacity: .9;
@@ -64,6 +65,13 @@
     border: 1px solid rgba(191,157,24,.4);
     padding: 6px 14px;
     white-space: nowrap;
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  @media (max-width: 520px) {
+    .nav-badge { display: none; }
   }
   .nav-badge::before {
     content: '';
@@ -173,10 +181,62 @@
   }
   .info-v em { font-style: italic; color: var(--gold-2); }
 
+  /* ── CTA ── */
+  .cta {
+    width: 100%;
+    max-width: 900px;
+    border: 1px solid var(--border);
+    background: var(--bg-surface);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 24px 32px;
+    text-decoration: none;
+    color: var(--fg);
+    transition: border-color .25s ease, background .25s ease;
+  }
+  .cta:hover {
+    border-color: rgba(191,157,24,.5);
+    background: #28302f;
+  }
+  .cta-text .cta-k {
+    font-size: 9px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 8px;
+  }
+  .cta-text .cta-h {
+    font-family: var(--serif);
+    font-size: clamp(18px, 3vw, 24px);
+    font-weight: 500;
+    line-height: 1.25;
+    color: var(--fg);
+  }
+  .cta-text .cta-h em { font-style: italic; color: var(--gold-2); }
+  .cta-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--primary-fg);
+    background: var(--primary);
+    border: 1px solid rgba(191,157,24,.4);
+    padding: 14px 22px;
+    white-space: nowrap;
+    transition: background .25s ease;
+  }
+  .cta:hover .cta-btn { background: var(--primary-dark); }
+  .cta-btn span.arrow { transition: transform .25s ease; }
+  .cta:hover .cta-btn span.arrow { transform: translateX(4px); }
+
   @media (max-width: 520px) {
-    .info-strip { grid-template-columns: 1fr; }
-    .info-item { border-right: none; border-bottom: 1px solid var(--border); }
-    .info-item:last-child { border-bottom: none; }
+    .cta { flex-direction: column; align-items: flex-start; text-align: left; }
+    .cta-btn { width: 100%; justify-content: center; }
   }
 
   /* ── Footer ── */
@@ -195,17 +255,10 @@
 <body>
 
 <nav>
-  <img src="https://masterclass-boutique--f4259h9zbn.replit.app/assets/logo-boutique-B1SX_fLI.webp" alt="Boutique Construtora" />
-  <span class="nav-badge">Ao vivo · Masterclass</span>
+  <img src="https://masterclass-boutique--f4259h9zbn.replit.app/assets/logo-boutique-B1SX_fLI.webp" alt="Boutique Construtora" style="width: 100px; height: 100px" />
 </nav>
 
 <div class="player-wrap">
-
-  <div class="title-block">
-    <p class="eyebrow">Masterclass exclusiva</p>
-    <h1>Foco do Cliente e <em>Posicionamento</em></h1>
-    <div class="deco-line"></div>
-  </div>
 
   <div class="video-container">
     <iframe
@@ -215,20 +268,13 @@
     ></iframe>
   </div>
 
-  <div class="info-strip">
-    <div class="info-item">
-      <div class="info-k">Data</div>
-      <div class="info-v">22 <em>jun</em></div>
+  <a class="cta" href="https://boutiqueconstrutora.com.br/bio/" target="_blank" rel="noopener">
+    <div class="cta-text">
+      <div class="cta-k">Continue explorando</div>
+      <div class="cta-h">Conheça os <em>outros produtos</em> da Boutique Construtora</div>
     </div>
-    <div class="info-item">
-      <div class="info-k">Horário</div>
-      <div class="info-v">19h <em>BRT</em></div>
-    </div>
-    <div class="info-item">
-      <div class="info-k">Formato</div>
-      <div class="info-v"><em>Ao vivo</em></div>
-    </div>
-  </div>
+    <span class="cta-btn">Acessar <span class="arrow">&rarr;</span></span>
+  </a>
 
 </div>
 
