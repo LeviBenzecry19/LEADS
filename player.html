@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+<title>Masterclass · Boutique Construtora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg:            #1f2426;
+    --bg-surface:    #242b2e;
+    --fg:            #e9e4d8;
+    --fg-muted:      #7d776e;
+    --primary:       #115551;
+    --primary-dark:  #0d413e;
+    --primary-fg:    #f7f5f1;
+    --border:        #2e3539;
+    --gold:          #bf9d18;
+    --gold-2:        #e4be25;
+    --sans: 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
+    --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    height: 100%;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* ── Nav ── */
+  nav {
+    background: var(--primary);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-shrink: 0;
+    border-bottom: 1px solid rgba(191,157,24,.25);
+  }
+  nav img {
+    height: 34px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: .9;
+  }
+  .nav-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(247,245,241,.6);
+    border: 1px solid rgba(191,157,24,.4);
+    padding: 6px 14px;
+    white-space: nowrap;
+  }
+  .nav-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold-2);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: .35; }
+  }
+
+  /* ── Player section ── */
+  .player-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 20px 48px;
+    gap: 24px;
+  }
+
+  /* title block */
+  .title-block {
+    text-align: center;
+    max-width: 640px;
+  }
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 12px;
+  }
+  .title-block h1 {
+    font-family: var(--serif);
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--fg);
+  }
+  .title-block h1 em {
+    font-style: italic;
+    color: var(--gold-2);
+  }
+  .deco-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    width: 80px;
+    margin: 14px auto 0;
+  }
+
+  /* video container */
+  .video-container {
+    width: 100%;
+    max-width: 900px;
+    position: relative;
+    border: 1px solid var(--border);
+    background: #000;
+    box-shadow: 0 24px 64px rgba(0,0,0,.55);
+  }
+  /* gold inner border accent */
+  .video-container::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(191,157,24,.15);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .video-container iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+  }
+
+  /* info strip */
+  .info-strip {
+    width: 100%;
+    max-width: 900px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--border);
+    background: var(--bg-surface);
+  }
+  .info-item {
+    padding: 16px 20px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+  }
+  .info-item:last-child { border-right: none; }
+  .info-k {
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 6px;
+  }
+  .info-v {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--fg);
+    line-height: 1.2;
+  }
+  .info-v em { font-style: italic; color: var(--gold-2); }
+
+  @media (max-width: 520px) {
+    .info-strip { grid-template-columns: 1fr; }
+    .info-item { border-right: none; border-bottom: 1px solid var(--border); }
+    .info-item:last-child { border-bottom: none; }
+  }
+
+  /* ── Footer ── */
+  footer {
+    background: var(--primary);
+    padding: 20px 24px;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(247,245,241,.35);
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <img src="https://masterclass-boutique--f4259h9zbn.replit.app/assets/logo-boutique-B1SX_fLI.webp" alt="Boutique Construtora" />
+  <span class="nav-badge">Ao vivo · Masterclass</span>
+</nav>
+
+<div class="player-wrap">
+
+  <div class="title-block">
+    <p class="eyebrow">Masterclass exclusiva</p>
+    <h1>Foco do Cliente e <em>Posicionamento</em></h1>
+    <div class="deco-line"></div>
+  </div>
+
+  <div class="video-container">
+    <iframe
+      src="https://drive.google.com/file/d/13DvYo3cKsoHkr4_KJQjzzOIOKoP7G4Rb/preview"
+      allow="autoplay"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <div class="info-strip">
+    <div class="info-item">
+      <div class="info-k">Data</div>
+      <div class="info-v">22 <em>jun</em></div>
+    </div>
+    <div class="info-item">
+      <div class="info-k">Horário</div>
+      <div class="info-v">19h <em>BRT</em></div>
+    </div>
+    <div class="info-item">
+      <div class="info-k">Formato</div>
+      <div class="info-v"><em>Ao vivo</em></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Boutique Construtora — Todos os direitos reservados.
+</footer>
+
+<script>
+  // Trap back-button: pushing a duplicate state means popstate just re-pushes,
+  // so the user never navigates away from this page.
+  history.pushState(null, '', window.location.href);
+  window.addEventListener('popstate', function () {
+    history.pushState(null, '', window.location.href);
+  });
+</script>
+
+</body>
+</html>
