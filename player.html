@@ -54,10 +54,14 @@
     gap: 18px;
   }
   nav img {
-    height: 46px;
+    height: 72px;
     object-fit: contain;
     filter: brightness(0) invert(1);
     opacity: .92;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
   .nav-meta {
     display: flex;
@@ -103,6 +107,7 @@
 
   @media (max-width: 720px) {
     nav { padding: 14px 18px; }
+    nav img { height: 52px; }
     .nav-meta { display: none; }
     .nav-cta .cta-full { display: none; }
     .nav-cta::after { content: 'Inscrever-se'; }
@@ -277,7 +282,7 @@
 </head>
 <body>
 
-<nav>
+<nav style="line-height: 3">
   <div class="nav-left">
     <img src="https://masterclass-boutique--f4259h9zbn.replit.app/assets/logo-boutique-B1SX_fLI.webp" alt="Boutique Construtora" />
     <div class="nav-meta">
