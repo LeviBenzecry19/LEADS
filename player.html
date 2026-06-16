@@ -62,6 +62,15 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  @media (max-width: 720px) {
+    nav img {
+      position: static;
+      transform: none;
+      height: 44px;
+    }
   }
   .nav-meta {
     display: flex;
@@ -106,8 +115,7 @@
   .nav-cta:hover .arrow { transform: translateX(4px); }
 
   @media (max-width: 720px) {
-    nav { padding: 14px 18px; }
-    nav img { height: 52px; }
+    nav { padding: 12px 16px; }
     .nav-meta { display: none; }
     .nav-cta .cta-full { display: none; }
     .nav-cta::after { content: 'Inscrever-se'; }
